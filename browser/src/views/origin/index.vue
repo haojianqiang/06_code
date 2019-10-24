@@ -16,6 +16,26 @@
       </el-form>
     </div>
 
+    <!-- 区块链应用 -->
+    <div class="info-title">
+      <span class="info-title-content">区块链应用</span>
+    </div>
+    <div class="custom-table">
+      <el-table
+        :data="tableData.block"
+        style="width: 100%"
+        :header-cell-style="{background:'#e6eaf3',height:'50px'}"
+        border
+        >
+        <el-table-column prop="source_code" label="溯源码"></el-table-column>
+        <el-table-column prop="hash" label="本区块的hash值"></el-table-column>
+        <el-table-column prop="county" label="城市"></el-table-column>
+        <el-table-column prop="town" label="区域"></el-table-column>
+        <el-table-column prop="farm" label="鸡场"></el-table-column>
+        <el-table-column prop="house" label="鸡棚"></el-table-column>
+      </el-table>
+    </div>
+
     <!-- 养殖户信息 -->
     <div class="info-title">
       <span class="info-title-content">养殖户信息</span>
@@ -179,6 +199,16 @@ export default {
   data() {
     return {
       tableData: {
+        block:[
+          {
+            source_code:'',
+            hash:'',
+            county:'',
+            area:'',
+            farm:'',
+            house:''
+          }
+        ],
         farm: [
           {
             name: "上海市普陀区金沙江路养鸡场",
@@ -332,24 +362,26 @@ export default {
         // spinner: "el-icon-loading",
       });
       let params = new URLSearchParams();
-      params.append("originCode", this.tableQuery.originCode);
+      params.append("sourceCode", this.tableQuery.originCode);
 
       this.$http({
         method: "post",
-        url: "/origin-server/source/index.json?action=traceOrigin",
+        // url: "/origin-server/source/index.json?action=traceOrigin",
+        url: "/web-server/origin/blockchain/query.json?action=query",
         data: params
       })
         .then(res => {
-          if (res.data.ok) {
-            this.tableData = res.data.data;
+          if (res.status==200) {
+            this.tableData.block = res.data.rows;
+              this.tableLoading = false
           } else {
-            this.tableData = {};
+            this.tableData.block = {};
           }
           loadingInstance.close();
         })
         .catch(err => {
           console.log(err);
-          this.tableData = {};
+          this.tableData.block = {};
           loadingInstance.close();
         });
     },
