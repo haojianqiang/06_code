@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gpdi.web.entity.roleUser.SysRoleUser">
+    <update id="updataRoleByUser" parameterType="java.util.Map" >
+        UPDATE sys_role_user SET is_enable =1 where role_id  not in
+        <foreach collection="array" item="employeeId" index="index" open="(" close=")" separator=",">
+            #{employeeId}
+        </foreach>
+        AND  user_id =#{userId};
+
+        UPDATE sys_role_user
+        SET is_enable = 0
+        WHERE role_id in
+        <foreach collection="array" item="employeeId" index="index" open="(" close=")" separator=",">
+            #{employeeId}
+        </foreach>
+        AND user_id =#{userId};
+
+    </update>
+</mapper>

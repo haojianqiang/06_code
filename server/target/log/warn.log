@@ -1,0 +1,6 @@
+15:42:51.147 [main%] WARN  com.jolbox.bonecp.BoneCPConfig -Please use setIdleConnectionTestPeriodInMinutes in place of setIdleConnectionTestPeriod. This method has been deprecated.
+15:42:54.495 [main%] WARN  com.netflix.config.sources.URLConfigurationSource -No URLs will be polled as dynamic configuration sources.
+15:42:54.503 [main%] WARN  com.netflix.config.sources.URLConfigurationSource -No URLs will be polled as dynamic configuration sources.
+15:56:30.184 [main%] WARN  com.jolbox.bonecp.BoneCPConfig -Please use setIdleConnectionTestPeriodInMinutes in place of setIdleConnectionTestPeriod. This method has been deprecated.
+15:56:31.896 [main%] WARN  com.netflix.config.sources.URLConfigurationSource -No URLs will be polled as dynamic configuration sources.
+15:56:31.904 [main%] WARN  com.netflix.config.sources.URLConfigurationSource -No URLs will be polled as dynamic configuration sources.

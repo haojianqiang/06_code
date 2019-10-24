@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://202.105.212.146:8080/jboss-net/services/SendSMS" xmlns:intf="http://202.105.212.146:8080/jboss-net/services/SendSMS" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="qrySendSMSStatRequest">
+
+      <wsdl:part name="ucNumber" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="smsFlag" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="ucPinNum" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="rand" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="connID" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="qryOffLineSMSResponse">
+
+      <wsdl:part name="qryOffLineSMSReturn" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSMSV3Request">
+
+      <wsdl:part name="uc" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="pw" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="rand" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="callee" type="impl:ArrayOf_xsd_string">
+
+      </wsdl:part>
+
+      <wsdl:part name="isreturn" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="cont" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="msgID" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="connID" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="charset" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="signCont" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSMSV2Request">
+
+      <wsdl:part name="uc" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="pw" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="rand" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="callee" type="impl:ArrayOf_xsd_string">
+
+      </wsdl:part>
+
+      <wsdl:part name="isreturn" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="cont" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="msgID" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="connID" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="charset" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="qrySendSMSStatResponse">
+
+      <wsdl:part name="qrySendSMSStatReturn" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSMSV2Response">
+
+      <wsdl:part name="sendSMSV2Return" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="qryOffLineSMSRequest">
+
+      <wsdl:part name="ucNumber" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="ucPinNum" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="rand" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="connID" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSMSResponse">
+
+      <wsdl:part name="sendSMSReturn" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSMSRequest">
+
+      <wsdl:part name="uc" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="pw" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="rand" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="callee" type="impl:ArrayOf_xsd_string">
+
+      </wsdl:part>
+
+      <wsdl:part name="isreturn" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="cont" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="msgid" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="connID" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSMSV3Response">
+
+      <wsdl:part name="sendSMSV3Return" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="SendSMS">
+
+      <wsdl:operation name="sendSMS" parameterOrder="uc pw rand callee isreturn cont msgid connID">
+
+         <wsdl:input message="impl:sendSMSRequest" name="sendSMSRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sendSMSResponse" name="sendSMSResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendSMSV2" parameterOrder="uc pw rand callee isreturn cont msgID connID charset">
+
+         <wsdl:input message="impl:sendSMSV2Request" name="sendSMSV2Request">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sendSMSV2Response" name="sendSMSV2Response">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendSMSV3" parameterOrder="uc pw rand callee isreturn cont msgID connID charset signCont">
+
+         <wsdl:input message="impl:sendSMSV3Request" name="sendSMSV3Request">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sendSMSV3Response" name="sendSMSV3Response">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="qryOffLineSMS" parameterOrder="ucNumber ucPinNum rand connID">
+
+         <wsdl:input message="impl:qryOffLineSMSRequest" name="qryOffLineSMSRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:qryOffLineSMSResponse" name="qryOffLineSMSResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="qrySendSMSStat" parameterOrder="ucNumber smsFlag ucPinNum rand connID">
+
+         <wsdl:input message="impl:qrySendSMSStatRequest" name="qrySendSMSStatRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:qrySendSMSStatResponse" name="qrySendSMSStatResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="SendSMSSoapBinding" type="impl:SendSMS">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="sendSMS">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendSMSRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://realization.webservice.uc.fin.huawei.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendSMSResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendSMSV2">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendSMSV2Request">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://realization.webservice.uc.fin.huawei.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendSMSV2Response">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendSMSV3">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendSMSV3Request">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://realization.webservice.uc.fin.huawei.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendSMSV3Response">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="qryOffLineSMS">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="qryOffLineSMSRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://realization.webservice.uc.fin.huawei.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="qryOffLineSMSResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="qrySendSMSStat">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="qrySendSMSStatRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://realization.webservice.uc.fin.huawei.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="qrySendSMSStatResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://202.105.212.146:8080/jboss-net/services/SendSMS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="SendSMSService">
+
+      <wsdl:port binding="impl:SendSMSSoapBinding" name="SendSMS">
+
+         <wsdlsoap:address location="http://202.105.212.146:8080/jboss-net/services/SendSMS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

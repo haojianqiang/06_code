@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpdi.contractweb.entity.ImportLog">
+
+    <update id="updateCodeById" parameterType="map">
+        update t_import_log set code = #{p1} where id = #{p0}
+    </update>
+
+    <select id="getByMd5" parameterType="java.lang.String" resultType="ImportLog">
+        select * from t_import_log where md5 = #{value} AND remark = '导入成功'
+    </select>
+
+    <select id="getFileName" parameterType="java.lang.String" resultType="java.lang.String">
+        select file_name from t_import_log where file_name = #{value} AND remark = '导入成功'
+    </select>
+
+</mapper>
