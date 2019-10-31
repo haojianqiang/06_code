@@ -94,8 +94,8 @@ public class PmHouseInfoRecordServiceImpl implements PmHouseInfoRecordService {
             return generalDao.queryList(Phone.class, "SELECT f.phone, f.farm_id, f.introduce FROM `pm_warning_phone` f WHERE farm_id=?\n" +
                     "union all\n" +
                     "SELECT distinct f.phone, '', '' FROM `pm_warning_phone` f\n" +
-                    "where not EXISTS(\n" +
-                    "SELECT 1 FROM `pm_warning_phone` t WHERE t.farm_id=? and t.farm_id=f.farm_id\n" +
+                    "where phone not in(\n" +
+                    "SELECT phone FROM `pm_warning_phone` t WHERE t.farm_id=? \n" +
                     ")",farmId,farmId);
         }
     }
