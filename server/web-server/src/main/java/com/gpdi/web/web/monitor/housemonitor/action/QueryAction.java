@@ -3,8 +3,8 @@ package com.gpdi.web.web.monitor.housemonitor.action;
 import com.gpdi.web.data.QueryData;
 import com.gpdi.web.entity.config.farm.Farm;
 import com.gpdi.web.entity.config.house.House;
+import com.gpdi.web.entity.config.phone.Phone;
 import com.gpdi.web.entity.monitor.housemonitor.PmHouseInfoRecord;
-import com.gpdi.web.entity.vo.ChicksDisVo;
 import com.gpdi.web.service.monitor.housemonitor.PmHouseInfoRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,9 +81,19 @@ public class QueryAction {
     }
 
     @RequestMapping
-    public ActionResult getBatchNumberAndId(Integer houseId){
-        List<ChicksDisVo> chicksDistributions = pmHouseInfoRecordService.getBatchNumberAndId(houseId);
-        return ActionResult.okWithData(chicksDistributions);
+    public ActionResult getPhoneAndId(Phone phone){
+        List<Phone> phones = pmHouseInfoRecordService.getPhoneAndId(phone.getFarmId());
+        return ActionResult.okWithData(phones);
+    }
+
+    @RequestMapping
+    public ActionResult savePhone(Phone phone, HttpServletRequest request) {
+        try {
+            pmHouseInfoRecordService.savePhone(phone);
+            return ActionResult.ok();
+        } catch (Exception e) {
+            return ActionResult.error(e);
+        }
     }
 
 }

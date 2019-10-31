@@ -4,14 +4,12 @@ import com.gpdi.web.dao.monitor.warning.PmWarningConfigDao;
 import com.gpdi.web.data.QueryData;
 import com.gpdi.web.entity.monitor.warning.PmWarningConfig;
 import com.gpdi.web.service.monitor.warning.PmWarningConfigService;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pub.dao.GeneralDao;
-import pub.dao.jdbc.dialect.mysql.PagedQuery;
-import pub.dao.query.Query;
-import pub.dao.query.QueryResult;
-import pub.dao.query.QuerySettings;
 
 import java.util.List;
 
@@ -46,5 +44,20 @@ public class PmWarningConfigServiceImpl implements PmWarningConfigService {
 
         }
         pmWarningConfigDao.save(pmWarningConfig);
+    }
+
+    @Override
+    public void savePhones(String[] callee, String smsCont, Integer farmId) {
+        //如果原来有多个号码，现在改成只有其中几个，则把原来的其他号码farm_id设置为0，方便后续删除
+        generalDao.execute("update pm_warning_phone set farm_id=0 where farm_id=? and phone not in(?)",farmId, StringUtils.join(callee,","));
+        for (int i = 0; i < callee.length; i++) {
+            List num = generalDao.queryList(List.class,"select phone from pm_warning_phone where (farm_id=? or farm_id is null) and phone=?",farmId,callee[i]);
+            if (num.size()>0){
+                generalDao.execute("update pm_warning_phone set farm_id=?, introduce=? where phone=? and (farm_id=? or farm_id is null)",farmId,smsCont,callee[i],farmId);
+            }else {
+                generalDao.execute("delete from pm_warning_phone where phone=? and (farm_id=? or farm_id=0)",callee[i],farmId);
+                generalDao.execute("insert into pm_warning_phone(phone,name,farm_id,introduce) values(?,?,?,?)",callee[i],"",farmId,smsCont);
+            }
+        }
     }
 }

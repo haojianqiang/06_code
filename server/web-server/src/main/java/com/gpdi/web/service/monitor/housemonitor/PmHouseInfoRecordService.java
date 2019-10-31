@@ -1,11 +1,10 @@
 package com.gpdi.web.service.monitor.housemonitor;
 
 import com.gpdi.web.data.QueryData;
-import com.gpdi.web.entity.config.chicksDistribution.ChicksDistribution;
 import com.gpdi.web.entity.config.farm.Farm;
 import com.gpdi.web.entity.config.house.House;
+import com.gpdi.web.entity.config.phone.Phone;
 import com.gpdi.web.entity.monitor.housemonitor.PmHouseInfoRecord;
-import com.gpdi.web.entity.vo.ChicksDisVo;
 import pub.dao.query.QueryResult;
 import pub.dao.query.QuerySettings;
 
@@ -24,5 +23,7 @@ public interface PmHouseInfoRecordService {
 
     List<House> getHouseNameAndId(Integer farmId);
 
-    List<ChicksDisVo> getBatchNumberAndId(Integer houseId);
+    List<Phone> getPhoneAndId(String farmId);
+
+    void savePhone(Phone phone);
 }

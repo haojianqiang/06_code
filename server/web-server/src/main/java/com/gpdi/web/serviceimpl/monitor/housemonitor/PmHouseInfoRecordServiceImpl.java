@@ -4,8 +4,8 @@ import com.gpdi.web.dao.monitor.housemonitor.PmHouseInfoRecordDao;
 import com.gpdi.web.data.QueryData;
 import com.gpdi.web.entity.config.farm.Farm;
 import com.gpdi.web.entity.config.house.House;
+import com.gpdi.web.entity.config.phone.Phone;
 import com.gpdi.web.entity.monitor.housemonitor.PmHouseInfoRecord;
-import com.gpdi.web.entity.vo.ChicksDisVo;
 import com.gpdi.web.service.monitor.housemonitor.PmHouseInfoRecordService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +81,28 @@ public class PmHouseInfoRecordServiceImpl implements PmHouseInfoRecordService {
     }
 
     @Override
-    public List<ChicksDisVo> getBatchNumberAndId(Integer houseId) {
-        return generalDao.queryList(ChicksDisVo.class, "select c.id, ck.batch_number batchNumber from ce_chicks_ccs c JOIN cm_chicks ck ON c.chicks_id = ck.id where c.status =  1 AND c.house_id = " + houseId);
+    public List<Phone> getPhoneAndId(String farmId) {
+        //1、短信通知人下拉框查询;
+        //2、根据farmId判断是否已有保存过的号码，没有则提供所有的号码
+        //有则根据farmId查询号码和短信内容，同时查询除此之外的其他号码
+        //3、相同farmId短信内容相同
+        String sql="select distinct farm_id from pm_warning_phone where farm_id=?";
+        List count = generalDao.queryList(Phone.class,sql,farmId);
+        if (count.size()==0){
+            return generalDao.queryList(Phone.class,"SELECT distinct f.phone,'' farm_id,'' introduce FROM `pm_warning_phone` f");
+        }else{
+            return generalDao.queryList(Phone.class, "SELECT f.phone, f.farm_id, f.introduce FROM `pm_warning_phone` f WHERE farm_id=?\n" +
+                    "union all\n" +
+                    "SELECT distinct f.phone, '', '' FROM `pm_warning_phone` f\n" +
+                    "where not EXISTS(\n" +
+                    "SELECT 1 FROM `pm_warning_phone` t WHERE t.farm_id=? and t.farm_id=f.farm_id\n" +
+                    ")",farmId,farmId);
+        }
+    }
+
+    @Override
+    public void savePhone(Phone phone) {
+        generalDao.execute("insert into pm_warning_phone(phone,name) values(?,?)",phone.getPhone(),phone.getName());
     }
 
     /**

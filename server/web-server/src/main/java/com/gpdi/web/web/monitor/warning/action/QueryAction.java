@@ -69,9 +69,9 @@ public class QueryAction {
             return ActionResult.error(e);
         }
     }
-    //保存预警内容或预警方式
+    //保存预警内容或预警方式，以及短信联系人和短信内容
     @RequestMapping
-    public ActionResult save ( String pmWarningConfigs ,Integer farmId, Integer houseId) {
+    public ActionResult save (String pmWarningConfigs ,Integer farmId, Integer houseId,String smsCont,String caller) {
         List<PmWarningConfig> configList = (List<PmWarningConfig>)JSONArray.toCollection(JSONArray.fromObject(pmWarningConfigs), PmWarningConfig.class);
         try {
             for (PmWarningConfig item :configList){
@@ -83,9 +83,15 @@ public class QueryAction {
                 item.setFarmId(farmId);
                 item.setHouseId(houseId);
                 pmWarningConfigService.save(item);
+
             }
+            List<String> callers = (List<String>) JSONArray.toCollection(JSONArray.fromObject(caller), List.class);
+            String[] callee = callers.toArray(new String[callers.size()]);
+            pmWarningConfigService.savePhones(callee,smsCont,farmId);
+
             return ActionResult.ok();
         } catch (Exception e) {
+            e.printStackTrace();
             return ActionResult.error(e);
         }
     }
