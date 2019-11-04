@@ -5,6 +5,10 @@ import com.gpdi.web.data.origin.BlockChain;
 import pub.dao.query.PageSettings;
 import pub.dao.query.QueryResult;
 
+import java.util.List;
+
 public interface BlockChainService {
     QueryResult query(BlockChain queryData, PageSettings settings);
+
+    List<BlockChain> getSourceCodes();
 }

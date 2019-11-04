@@ -2,11 +2,14 @@
   <div class>
     <div style="text-align:center;margin-top:10px;">
       <el-form :inline="true" :model="tableQuery" class="demo-form-inline" ref="tableQuery">
-        <el-form-item label="溯源码" prop="originCode">
+        <!--<el-form-item label="溯源码" prop="originCode">
           <el-input v-model="tableQuery.originCode" placeholder="请输入溯源码"></el-input>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item>
-          <el-button style="background-color: #3ebf7c" @click="fetchData()" type="success">溯源</el-button>
+          <el-select placeholder="请选择溯源码" v-model.trim="tableQuery.originCode">
+            <el-option v-for="item in codes" :key="item.id" :label="item.sourceCode" :value="item.sourceCode"/>
+          </el-select>
+          <el-button style="background-color: #3ebf7c;margin-left: 5px" @click="fetchData()" type="success">溯源</el-button>
           <el-button
             style="background-color: #3ebf7c"
             @click="reset('tableQuery')"
@@ -198,6 +201,7 @@ export default {
   name: "Origin",
   data() {
     return {
+      codes: '',
       tableData: {
         block:[
           {
@@ -347,7 +351,22 @@ export default {
       dialogImgUrl: null
     };
   },
+  created() {
+    this.fetchCodes();
+  },
   methods: {
+    //溯源码下拉框
+    fetchCodes(){
+      this.$http({
+        method: "post",
+        url: "/web-server/origin/blockchain/query.json?action=getSourceCodes",
+      }).then(res => {
+        this.codes = res.data.data;
+      }).catch(err => {
+        console.log(err);
+      });
+    },
+
     // 查询
     fetchData() {
       if (!this.tableQuery.originCode) {
@@ -387,7 +406,8 @@ export default {
     },
     // 重置
     reset(formName) {
-      this.$refs[formName].resetFields();
+      //this.$refs[formName].resetFields();
+      this.tableQuery.originCode='';
     },
     // 展示图片
     openImg(url) {

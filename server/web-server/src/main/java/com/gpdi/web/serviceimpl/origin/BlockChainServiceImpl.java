@@ -12,6 +12,8 @@ import pub.dao.query.PageSettings;
 import pub.dao.query.Query;
 import pub.dao.query.QueryResult;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = false)
 public class BlockChainServiceImpl implements BlockChainService {
@@ -32,5 +34,10 @@ public class BlockChainServiceImpl implements BlockChainService {
         generalDao.execute(query);
         QueryResult queryResult = query.getResult();
         return queryResult;
+    }
+
+    @Override
+    public List<BlockChain> getSourceCodes() {
+        return generalDao.queryList(BlockChain.class, "SELECT f.id, f.source_code FROM `og_source` f order by createTime desc limit 5");
     }
 }
