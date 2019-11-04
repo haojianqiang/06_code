@@ -137,6 +137,8 @@
                 }).then(res => {
                     this.$message.success("发送成功")
                 }).catch(err => {
+                    this.$message.error("发送失败")
+                    //发送失败
                     console.log(err);
                 });
 
