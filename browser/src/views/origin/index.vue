@@ -6,9 +6,14 @@
           <el-input v-model="tableQuery.originCode" placeholder="请输入溯源码"></el-input>
         </el-form-item>-->
         <el-form-item>
-          <el-select placeholder="请选择溯源码" v-model.trim="tableQuery.originCode">
+          <!--<el-select placeholder="请选择溯源码" v-model.trim="tableQuery.originCode">
             <el-option v-for="item in codes" :key="item.id" :label="item.sourceCode" :value="item.sourceCode"/>
-          </el-select>
+          </el-select>-->
+          <select class="select-box" v-model.trim="tableQuery.originCode" @change="fillInput">
+            <option v-for="item in codes" :key="item.id" :label="item.sourceCode" :value="item.sourceCode"/>
+          </select>
+          <input type="text" placeholder="请选择溯源码" class="input-box" ref="inputBox" :value="tableQuery.originCode" @input="changeValue()"/>
+
           <el-button style="background-color: #3ebf7c;margin-left: 5px" @click="fetchData()" type="success">溯源</el-button>
           <el-button
             style="background-color: #3ebf7c"
@@ -348,13 +353,18 @@ export default {
         originCode: ""
       },
       imgVisible: false,
-      dialogImgUrl: null
+      dialogImgUrl: null,
     };
   },
+
   created() {
     this.fetchCodes();
   },
   methods: {
+    changeValue(){
+      var text = this.$refs.inputBox.value;
+      this.tableQuery.originCode = text;
+    },
     //溯源码下拉框
     fetchCodes(){
       this.$http({
@@ -451,6 +461,24 @@ export default {
 };
 </script>
 <style>
+.select-box {
+  width: 300px;
+  height: 43px;
+  padding-left: 20px;
+  font-size: 18px;
+}
+
+.input-box {
+  position: absolute;
+  margin-left: -300px;
+  box-sizing: border-box;
+  border: 1px solid #9e9e9e;
+  border-right: none;
+  width: 280px;
+  height: 43px;
+  padding-left: 23px;
+  font-size: 18px;
+}
 .tableHeader {
   height: 50px;
   background: #e6eaf3;
