@@ -43,33 +43,33 @@ export default {
       params.append("account", this.loginForm.account);
       params.append("password", this.loginForm.password);
 
-      // this.$router.replace({path: "/main"});
+      this.$router.replace({path: "/main"});
 
-      // 发送请求
-      this.$http({
-        method: "post",
-        url: "/login.json?action=login",
-        data: params
-      })
-        .then(res => {
-          console.log(res);
-          if (res.data.ok) {
-            // 缓存数据
-            _this.$store.state.user = {id:res.data.data.userId,userName:res.data.data.userName};
-            _this.$store.state.modules = res.data.data.modules;
-            _this.$store.state.moduleId = res.data.data.modules[0].moduleId;
-            // console.log(_this.$store.state.modules)
-            // 路由跳转
-            this.$router.replace({
-              path: "/main"
-            });
-          }else {
-              this.$message.error("密码错误");
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // // 发送请求
+      // this.$http({
+      //   method: "post",
+      //   url: "/login.json?action=login",
+      //   data: params
+      // })
+      //   .then(res => {
+      //     console.log(res);
+      //     if (res.data.ok) {
+      //       // 缓存数据
+      //       _this.$store.state.user = {id:res.data.data.userId,userName:res.data.data.userName};
+      //       _this.$store.state.modules = res.data.data.modules;
+      //       _this.$store.state.moduleId = res.data.data.modules[0].moduleId;
+      //       // console.log(_this.$store.state.modules)
+      //       // 路由跳转
+      //       this.$router.replace({
+      //         path: "/main"
+      //       });
+      //     }else {
+      //         this.$message.error("密码错误");
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
 
     },
     // 测试不通过

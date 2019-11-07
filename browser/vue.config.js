@@ -15,11 +15,35 @@ module.exports = {
     https: false,
     hotOnly: false, // 热更新,webpack已实现,此处false即可
     proxy: {
-      "/api": {
+      // "/api": {
+      //   target: "http://127.0.0.1:8082",
+      //   changeOrigin: true, // 是否跨域
+      //   pathRewrite: {
+      //     "^/api": "/" // 规定请求地址以什么作为开头
+      //   }
+      // }
+      //登录接口独享
+      "/api/login": {
         target: "http://127.0.0.1:8082",
         changeOrigin: true, // 是否跨域
         pathRewrite: {
-          "^/api": "/" // 规定请求地址以什么作为开头
+          "^/api/login": "" // 规定请求地址以什么作为开头
+        }
+      },
+      //养鸡服务接口
+      "/api/web-server": {
+        target: "http://127.0.0.1:8082",
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          "^/api/web-server": "/web-server" // 规定请求地址以什么作为开头
+        }
+      },
+      //视频播放接口
+      "/api/play": {
+        target: "http://192.168.1.106:10010",
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          "^/api/play": "/" // 规定请求地址以什么作为开头
         }
       }
     }, // 设置代理

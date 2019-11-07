@@ -147,6 +147,36 @@ export default new Router({
               requireAuth: true
           }
         },
+          {
+              path: "playBack",
+              component: () => import("@/views/play/playContenRoot.vue"),
+              meta: {
+                  requireAuth: true
+              },
+              children: [
+                  {
+                      path: '',
+                      redirect: '1'
+                  },
+                  {
+                      path: ':page',
+                      name:"设备列表",
+                      component: () => import("@/views/play/deviceList.vue"),
+                      props: true
+                  }, {
+                      path: 'channels/:devid/:page',
+                      name:"通道列表",
+                      component: () => import("@/views/play/channelList.vue"),
+                      props: true
+                  },
+                  {
+                      path: 'timebox/:devid/:channel/:day?',
+                      name:"录像回放",
+                      component:() => import("@/views/play/playbackTimebox.vue"),
+                      props: true
+                  }
+              ]
+          },
 		{
           path: "alertSettings",
           name: "预警设置",

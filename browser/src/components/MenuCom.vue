@@ -44,7 +44,8 @@
           <span>监控预警</span>
         </template>
         <el-menu-item index="/houseMonitor">鸡棚监控信息</el-menu-item>
-		<el-menu-item index="/alertSettings">预警设置</el-menu-item>
+        <el-menu-item index="/playBack">鸡棚监控回放</el-menu-item>
+        <el-menu-item index="/alertSettings">预警设置</el-menu-item>
         <el-menu-item index="/warningThreshold">预警阈值设置</el-menu-item>
         <el-menu-item index="/warningNotice">预警通知设置</el-menu-item>
         <el-menu-item index="/warningContent">预警内容设置</el-menu-item>
