@@ -7,6 +7,8 @@ import com.gpdi.web.entity.config.house.House;
 import com.gpdi.web.entity.config.phone.Phone;
 import com.gpdi.web.entity.monitor.housemonitor.PmHouseInfoRecord;
 import com.gpdi.web.service.monitor.housemonitor.PmHouseInfoRecordService;
+import com.gpdi.web.utils.HttpRequest;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -108,46 +110,39 @@ public class PmHouseInfoRecordServiceImpl implements PmHouseInfoRecordService {
     /**
      *  已迁移到schedule服务
      */
-    //模拟天气数据 定时向数据库插入 每小时插入一条
-//    @Scheduled(cron = "0 0 * * * ?")
+    //每7分钟时向数据库插入一条实时的传感器数据
+    @Scheduled(cron = "0 0/7 * * * ? ")
     public void timingSave(){
+        String SensorData= HttpRequest.interfaceUtil("http://www.nolan.net.cn:10023/agr/post/", "[{\"USR\":\"LHD\",\"PW\":\"123456\",\"ID\":\"F528009C0936D7\"}]");
+
+        JSONArray sensor= JSONArray.fromObject(SensorData);
+        Object date=sensor.getString(0);
+        JSONObject BigDate = JSONObject.fromObject(date);
+
+        String ETMP=BigDate.getString("ETMP");
+        String EHUM=BigDate.getString("EHUM");
+        String CO2=BigDate.getString("CO2");
+        String NH3=BigDate.getString("NH3");
+        //强转为float
+        Float ETMP1= Float.valueOf(ETMP);
+        Float EHUM1= Float.valueOf(EHUM);
+        Float CO21= Float.valueOf(CO2);
+        Float NH31= Float.valueOf(NH3);
         PmHouseInfoRecord newRecord = null;
         //获取全部鸡舍
         List<Integer> houseIds = generalDao.queryList(Integer.class, "select id from cm_house");
-        //存到redis中
-        Map<String,String> recordMap= new HashMap<String,String>();
         for(Integer id :houseIds){
-            //获取上一条数据
-            StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.append("select id,house_id as 'houseId',avg_wight as 'avgWight',co2,nh3,temperature,");
-            sqlBuilder.append("humidity,weather,create_time as 'createTime',modify_time as 'modifyTime',modifier,modifier_id as 'modifierId'");
-            sqlBuilder.append("from pm_house_info_record where house_id = "+id);
-            sqlBuilder.append("  ORDER BY create_time DESC LIMIT 1");
-            PmHouseInfoRecord last =  generalDao.queryValue(PmHouseInfoRecord.class, sqlBuilder.toString());
             newRecord = new PmHouseInfoRecord();
             newRecord.setHouseId(id);
             newRecord.setCreateTime(new Date());//创建时间
-            if(last == null){
-                newRecord.setAvgWight(Float.valueOf("0.2"));//均重
-                newRecord.setCo2(Float.valueOf("400"));//二氧化碳浓度
-                newRecord.setNh3(Float.valueOf("1"));//氨气浓度
-                newRecord.setTemperature(Float.valueOf("19"));//温度
-                newRecord.setHumidity(Float.valueOf("50"));//湿度
-            }else{
-                newRecord.setAvgWight(last.getAvgWight() <=5 ? last.getAvgWight()+Float.valueOf("0.1"):last.getAvgWight());//均重
-                newRecord.setCo2(last.getCo2() >=900 ? Float.valueOf("400"):last.getCo2()+ Float.valueOf("20"));//二氧化碳浓度 400-900
-                newRecord.setNh3( last.getNh3() >= 10 ? Float.valueOf("1"):last.getCo2()+ Float.valueOf("0.1"));//氨气浓度
-                newRecord.setTemperature(last.getTemperature()>=30 ? Float.valueOf("19"):last.getTemperature()+Float.valueOf("0.1"));//温度
-                newRecord.setHumidity(last.getHumidity() >= 70 ? Float.valueOf("64.0"):last.getHumidity()+Float.valueOf("0.5"));//湿度
-            }
+            newRecord.setAvgWight(Float.valueOf("0.2"));//均重
+            newRecord.setCo2(CO21);//二氧化碳浓度
+            newRecord.setNh3(NH31);//氨气浓度
+            newRecord.setTemperature(ETMP1);//温度
+            newRecord.setHumidity(EHUM1);//湿度
             save(newRecord);
-            //转换成json
-            JSONObject jsonObject = JSONObject.fromObject(newRecord);
-            // "鸡舍id" ："{鸡舍环境信息json}"
-            recordMap.put(id.toString(),jsonObject.toString());
         }
-        //将Map存到redis中
-        redisTemplate.opsForHash().putAll("pm_house_info_record:newest",recordMap);
+
     }
 
 }
