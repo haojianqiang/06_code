@@ -129,7 +129,7 @@
       <el-main>
         <div class="myBorder myStyle">
           <el-row>
-            <el-col :span="6">
+            <el-col :span="8">
               <div class="span-text-1">区域城市:</div>
                 <el-select v-model="city" size="small" placeholder="请选择" @change="DropdownBoxRegion()">
                   <el-option
@@ -141,7 +141,7 @@
                 </el-select>
             </el-col>
 
-              <el-col :span="6">
+              <el-col :span="8">
               <div class="span-text-1">鸡场:</div>
                 <el-select v-model="chickenFarm" size="small" clearable  placeholder="请选择" @change="DropdownBoxfarmOptions()">
                 <el-option
@@ -153,7 +153,7 @@
               </el-select>
             </el-col>
 
-              <el-col :span="6">
+              <el-col :span="8">
               <div class="span-text-1">鸡棚:</div>
                 <el-select v-model="chickenHouse" size="small" clearable  placeholder="请选择" @change="DropdownBoxChickenHouse()">
                   <el-option
@@ -170,11 +170,11 @@
             <div class="myPadding">
                 <el-table
                 :data="warningInfo"
-                :row-style="warningTableRowStyle"
+                row-style="opacity: 0;color: #fff;font-weight: 500;border: 1px solid #03559d"
                 :header-cell-style="warnIngTableHeaderColor"
-                :cell-style="colColor"
+                cell-style="opacity: 0;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d"
                 height="130"
-                style="width: 100%">
+                style="width: 100%;">
                 <el-table-column label="预警信息">
                    <el-table-column
                   prop="farmName"
@@ -326,7 +326,7 @@ export default {
     data() {
             return {
               bgInfo:{
-                  backgroundImage: "url(" + require("../assets/image/bg.png") + ")",
+                  backgroundImage: "url(" + require("../assets/image/bg1.png") + ")",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "25px auto",
               },
@@ -1511,19 +1511,19 @@ export default {
        //修改table header的背景色
        warnIngTableHeaderColor({row,column,rowIndex,columnIndex}){
          if(rowIndex === 0){
-           return 'background-color: #011120;color: #fff;font-weight: 500;font-size:24px;border: 1px solid #03559d'
+           return 'background-color: #002b71;color: #fff;font-weight: 500;font-size:24px;border: 1px solid #03559d'
          }
           if(rowIndex === 1 ){
-           return 'background-color: #011120;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d'
+           return 'background-color: #002b71;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d'
          }
        },
        colColor({row,column,rowIndex,columnIndex}){
-        return 'background-color: #011120;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d'
+        return 'background-color: #002b71;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d'
        },
 
         //  //修改table tr行的背景色
        tableRowStyle({row,rowIndex}){
-        return 'background-color: #011120;color: #fff;font-weight: 300;'
+        return 'background-color: #002b71;color: #fff;font-weight: 300;'
        },
        //修改table header的背景色
        tableHeaderColor({row,column,rowIndex,columnIndex}){
@@ -1606,21 +1606,25 @@ export default {
 
 <style>
   .myStyle  .el-input__inner{
-      background-color: rgb(1, 17, 32)!important;
+      background-color: rgb(1, 17, 32, 0)!important;
       border: 1px solid rgb(7, 127, 232)!important;
   }
-    .el-picker-panel .el-date-picker .el-popper {
-            height: 32px;
-            line-height: 32px;
-            background-color: #011120;
-            border: solid 1px #03559d;
-            color: #04A5A4;
-          }
-    .myStyle .available {
-      color: white!important;
-    }
+  .el-picker-panel .el-date-picker .el-popper {
+          height: 32px;
+          line-height: 32px;
+          background-color: #011120;
+          border: solid 1px #03559d;
+          color: #04A5A4;
+        }
+  .myStyle .available {
+    color: white!important;
+  }
 
-    .myStyle .el-table tbody tr:hover>td { background-color: #011120!important }
+  .myStyle .el-table tbody tr:hover>td {
+    background-color: #011120!important
+  }
+
+  
           
 </style>
 
@@ -1744,7 +1748,7 @@ export default {
           }
 
           ::-webkit-scrollbar-thumb {
-              background-color: #5a76cd;
+              background-color: #5a77cd;
           }
           /* 时间控件样式 */
           /* .el-picker-panel .el-date-picker .el-popper{
@@ -1752,8 +1756,8 @@ export default {
           } */
           
 
-          .el-table{
-            background-color: #011120!important;
+          .el-table {
+            background-color:rgb(1, 1, 1, 0)!important;
             color:#03559d;
             border: 0.5px solid #03559d!important;
           }
@@ -1765,7 +1769,6 @@ export default {
           }
           .myPadding .el-table td, .el-table th.is-leaf {
            border-bottom: 1px solid #03559d!important;
-          } 
-          
+          }
 </style>
 
