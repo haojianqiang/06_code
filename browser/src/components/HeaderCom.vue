@@ -40,7 +40,7 @@ export default {
     logout() {
       this.$http({
         method: "post",
-        url: "/login.json?action=logout",
+        url: "/login/login.json?action=logout",
       })
         .then(res => {
           // console.log(res);

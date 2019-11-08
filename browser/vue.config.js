@@ -40,7 +40,7 @@ module.exports = {
       },
       //视频播放接口
       "/api/play": {
-        target: "http://192.168.1.106:10010",
+        target: "http://172.16.107.71:10000",
         changeOrigin: true, // 是否跨域
         pathRewrite: {
           "^/api/play": "/" // 规定请求地址以什么作为开头
