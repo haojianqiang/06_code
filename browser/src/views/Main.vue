@@ -170,9 +170,9 @@
             <div class="myPadding">
                 <el-table
                 :data="warningInfo"
-                row-style="opacity: 0;color: #fff;font-weight: 500;border: 1px solid #03559d"
+                :row-style="tableRowStyle1"
                 :header-cell-style="warnIngTableHeaderColor"
-                cell-style="opacity: 0;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d"
+                :cell-style="tableCellStyle1"
                 height="130"
                 style="width: 100%;">
                 <el-table-column label="预警信息">
@@ -324,188 +324,194 @@
   import echarts from 'echarts'
 export default {
     data() {
-            return {
-              bgInfo:{
-                  backgroundImage: "url(" + require("../assets/image/bg1.png") + ")",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "25px auto",
-              },
-              center:{
-                  backgroundImage: "url(" + require("../assets/image/bg-logo.png") + ")",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center 1vw",
-                  backgroundSize:"40vw 3vw",
-            
-              },
-                chartColumn: null,
-                drawDepositInfo:null,
-                drawTemperature:null,
-                drawHumidity:null,
-                drawCO2:null,
-                drawAmmonia:null,
-                startTime:'',
-                endTime:'',
-                startTimeTwo:'',
-                endTimeTwo:'',
-                city:'永靖镇',
-                tableQuerytown:'',
-                tableQuerytemperature:'',
-                tablemeteorology:'',
-                tablehumidity:'',
-                tablewind_direction:'',
-                tableAirQuality:'',
-                tablePrecipitation:'',
-
-                HumidityOnCo2:null,
-                feedList:null,
-                medicineList:null,
-                stock:null,
-                breedingDeath:[{育成率:100,死亡率:0}],
-                chickenFarm:'',
-                chickenHouse: [],
-                warningInfo:null,
-                columnInfo:null,
-                productionInfo:null,
-                region: [
-                  {value: '永靖镇',label: '永靖镇'},
-                  {value: '温泉镇',label: '温泉镇'},
-                  {value: '九庄镇',label: '九庄镇'},
-                  {value: '小寨坝镇',label: '小寨坝镇'},
-                  {value: '青山苗族乡',label: '青山苗族乡'},
-                  {value: '西山乡',label: '西山乡'},
-                  {value: '养龙司乡',label: '养龙司乡'},
-                    {value: '石硐乡',label: '石硐乡'},
-                    {value: '鹿窝乡',label: '鹿窝乡'},
-                    {value: '流长乡',label: '流长乡'}
-                ],
-
-                farmOptions: [],
-              chickenHouse: '',
-
-              //饲料及药物用量表格数据
-              feedAndMedicine:[],
-              screenHeight: document.body.clientHeight,
-                //当前时间
-                currentDate: ''
-            }
+      return {
+        bgInfo:{
+            backgroundImage: "url(" + require("../assets/image/bg1.png") + ")",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "25px auto",
         },
-        created() {
-            /*this.fetchData();*/
-            this.DropdownBoxRegion();
-            this.showTime();
+        center:{
+            backgroundImage: "url(" + require("../assets/image/bg-logo.png") + ")",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center 1vw",
+            backgroundSize:"40vw 3vw",
+      
         },
+          chartColumn: null,
+          drawDepositInfo:null,
+          drawTemperature:null,
+          drawHumidity:null,
+          drawCO2:null,
+          drawAmmonia:null,
+          startTime:'',
+          endTime:'',
+          startTimeTwo:'',
+          endTimeTwo:'',
+          city:'永靖镇',
+          tableQuerytown:'',
+          tableQuerytemperature:'',
+          tablemeteorology:'',
+          tablehumidity:'',
+          tablewind_direction:'',
+          tableAirQuality:'',
+          tablePrecipitation:'',
 
-        methods: {
-          // 肉鸡出存栏信息
-            drawColumnChart() {
-                var numberOfBarsList =[];
-                var liveValueList =[];
-                var saleValueList= [];
-                if(this.columnInfo) {
-                    this.columnInfo.forEach(function (item, index) {
-                        numberOfBarsList.push(item.鸡棚);
-                        liveValueList.push(item.存栏);
-                        saleValueList.push(item.出栏);
-                    });
-                }
-                this.chartColumn = echarts.init(document.getElementById('chartColumn'));
-                this.chartColumn.setOption({
-                    grid:{
-                        bottom:'15%',
-                        left:'15%'
-                    },
-                    legend:{
-                        itemGap: 40,
-                        data:['存栏量','成交量'],
-                        textStyle:{
-                            color: '#ffffff',//字体颜色
-                            fontSize:14
-                        },
-                    },
-                    tooltip: {},
-                    xAxis: {
-                        data: numberOfBarsList,
-                        axisLabel:{
-                            interval:'auto'
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: '#ffffff',
+          HumidityOnCo2:null,
+          feedList:null,
+          medicineList:null,
+          stock:null,
+          breedingDeath:[{育成率:100,死亡率:0}],
+          chickenFarm:'',
+          chickenHouse: [],
+          warningInfo:null,
+          columnInfo:null,
+          productionInfo:null,
+          region: [
+            {value: '永靖镇',label: '永靖镇'},
+            {value: '温泉镇',label: '温泉镇'},
+            {value: '九庄镇',label: '九庄镇'},
+            {value: '小寨坝镇',label: '小寨坝镇'},
+            {value: '青山苗族乡',label: '青山苗族乡'},
+            {value: '西山乡',label: '西山乡'},
+            {value: '养龙司乡',label: '养龙司乡'},
+              {value: '石硐乡',label: '石硐乡'},
+              {value: '鹿窝乡',label: '鹿窝乡'},
+              {value: '流长乡',label: '流长乡'}
+          ],
 
-                            },
-                        },
-                        scale: true,
-                        splitNumber:10,
-                        boundaryGap: [0.2, 0.2]
-                    },
-                    yAxis: {
-                        type: 'value',
-                        name: '单位:只',
-                       /* min: 0,
-                        max: 1000,
-                        interval: 200,*/
-                        axisLabel: {
-                            formatter: '{value}'
-                        },
-                        splitLine:{
-                            show:false
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: '#ffffff'
-                            }
-                        }
-                    },
-                    series: [
-                        {
-                            name:"存栏量",
-                            type:'bar',
-                            data: liveValueList,
-                            barWidth:12,
-                            barMaxWidth:15,
-                            itemStyle: {
-                                normal: {
-                                    label:{
+          farmOptions: [],
+        chickenHouse: '',
 
-                                        textStyle:{
-                                            color:'#fff',
-                                            fontSize:12,
-                                        }
-                                    },
-                                    color: new echarts.graphic.LinearGradient(0,1,0,0,[
-                                        {offset:0,color:"#F5DEB3"},
-                                        {offset:0.6,color:"#FFDEAD"},
-                                        {offset:1,color:"#FFE4C4"},
-                                    ])
-                                },
-                            },
-                        },
-                        {
-                            name:"成交量",
-                            type:'bar',
-                            barWidth:12,
-                            barMaxWidth:15,
-                            data: saleValueList,
-                            itemStyle: {
-                                normal: {
-                                    label:{
+        //饲料及药物用量表格数据
+        feedAndMedicine:[],
+        screenHeight: document.body.clientHeight,
+          //当前时间
+          currentDate: '',
+          tableRowStyle1: {
+            'opacity': 0,'color': '#fff','font-weight': 500,'border': '1px solid #03559d'
+          },
+          tableCellStyle1: {
+            'opacity': 0,'color': '#fff', 'font-weight': 500, 'font-size':'16px', 'border': '1px solid #03559d'
+          },
 
-                                        textStyle:{
-                                            color:'#fff',
-                                            fontSize:12,
-                                        }
-                                    },
-                                    color: new echarts.graphic.LinearGradient(0,1,0,0,[
-                                        {offset:0,color:"#AFEEEE"},
-                                        {offset:0.6,color:"#87CECB"},
-                                        {offset:1,color:"#48D1CC"},
-                                    ])
-                                },
-                            },
-                        }
-                    ]
-                });
+      }
+    },
+    created() {
+      /*this.fetchData();*/
+      this.DropdownBoxRegion();
+      this.showTime();
+    },
+    methods: {
+      // 肉鸡出存栏信息
+        drawColumnChart() {
+          var numberOfBarsList =[];
+          var liveValueList =[];
+          var saleValueList= [];
+          if(this.columnInfo) {
+            this.columnInfo.forEach(function (item, index) {
+                numberOfBarsList.push(item.鸡棚);
+                liveValueList.push(item.存栏);
+                saleValueList.push(item.出栏);
+            });
+          }
+          this.chartColumn = echarts.init(document.getElementById('chartColumn'));
+          this.chartColumn.setOption({
+            grid:{
+              bottom:'15%',
+              left:'15%'
             },
+            legend:{
+              itemGap: 40,
+              data:['存栏量','成交量'],
+              textStyle:{
+                color: '#ffffff',//字体颜色
+                fontSize:14
+              },
+            },
+            tooltip: {},
+            xAxis: {
+              data: numberOfBarsList,
+              axisLabel:{
+                  interval:'auto'
+              },
+              axisLine: {
+                  lineStyle: {
+                      color: '#ffffff',
+
+                  },
+              },
+              scale: true,
+              splitNumber:10,
+              boundaryGap: [0.2, 0.2]
+            },
+            yAxis: {
+              type: 'value',
+              name: '单位:只',
+              /* min: 0,
+              max: 1000,
+              interval: 200,*/
+              axisLabel: {
+                  formatter: '{value}'
+              },
+              splitLine:{
+                show:false
+              },
+              axisLine: {
+                lineStyle: {
+                    color: '#ffffff'
+                }
+              }
+            },
+                series: [
+                    {
+                        name:"存栏量",
+                        type:'bar',
+                        data: liveValueList,
+                        barWidth:12,
+                        barMaxWidth:15,
+                        itemStyle: {
+                            normal: {
+                                label:{
+
+                                    textStyle:{
+                                        color:'#fff',
+                                        fontSize:12,
+                                    }
+                                },
+                                color: new echarts.graphic.LinearGradient(0,1,0,0,[
+                                    {offset:0,color:"#F5DEB3"},
+                                    {offset:0.6,color:"#FFDEAD"},
+                                    {offset:1,color:"#FFE4C4"},
+                                ])
+                            },
+                        },
+                    },
+                    {
+                        name:"成交量",
+                        type:'bar',
+                        barWidth:12,
+                        barMaxWidth:15,
+                        data: saleValueList,
+                        itemStyle: {
+                            normal: {
+                                label:{
+
+                                    textStyle:{
+                                        color:'#fff',
+                                        fontSize:12,
+                                    }
+                                },
+                                color: new echarts.graphic.LinearGradient(0,1,0,0,[
+                                    {offset:0,color:"#AFEEEE"},
+                                    {offset:0.6,color:"#87CECB"},
+                                    {offset:1,color:"#48D1CC"},
+                                ])
+                            },
+                        },
+                    }
+                ]
+            });
+        },
           //存栏量信息
           drawDepositInfoChart(){
             var numberOfBarsList =[];
@@ -1582,7 +1588,7 @@ export default {
     //         colHeight = total*0.2-document.getElementById("col1").offsetTop;
     // document.getElementById("col1").style.height=colHeight +"px";
             // console.dir(this.$refs.leftOne.$el.clientHeight);
-        },
+    },
         watch:{
           screenWidth(val){
              if(!this.timer){

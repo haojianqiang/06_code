@@ -140,12 +140,10 @@ export default {
     },
     getRecords(refresh) {
       if(refresh) {
-          console.log(1);
         this.loading = true;
         this.records = [];
       }
       if(!this.nextTimeRange()){
-          console.log(2);
         this.videos = this.records;
         this.loading = false;
         return
@@ -161,7 +159,7 @@ export default {
         }}
     ).then(res => {
         this.records = this.records.concat(res.data["RecordList"]);
-        console.log("记录："+this.records);
+        // console.log("记录："+this.records);
     }).catch(err => {
         console.log(err);
     }).finally(()=>{
@@ -209,7 +207,7 @@ export default {
                     endtime: this.video.EndTime
                 }}
         ).then(res => {
-            console.log(res);
+            // console.log(res);
             var videoUrl = this.isMobile() ? res.data.HLS : res.data.RTMP;
             if( res.data.FLV) {
                 videoUrl = res.data.FLV;

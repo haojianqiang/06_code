@@ -226,15 +226,6 @@ export default new Router({
             requireAuth: true
           }
         },
-        // 农技服务
-        {
-          path: "index",
-          name: "首页",
-          component: () => import("@/views/Index.vue"),
-          meta: {
-            requireAuth: true
-          }
-        },
         // 资料库
         {
           path: "dataBank",

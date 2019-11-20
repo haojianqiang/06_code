@@ -8,7 +8,7 @@
       text-color="#000"
       active-text-color="#3ebf7c"
       class="el-menu-vertical-demo"
-      unique-opened="true"
+      :unique-opened=true
       router
     >
       <el-menu-item index="/main">
@@ -70,6 +70,7 @@
         <el-menu-item index="/offlineBooking">线下预约</el-menu-item>
         <el-menu-item index="/feedBack">农户反馈</el-menu-item>
       </el-submenu>
+
      <!-- <el-menu-item index="/main2">
         <i class="el-icon-search"></i>
         <span slot="title">测试首页</span>

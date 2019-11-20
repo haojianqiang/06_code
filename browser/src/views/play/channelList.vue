@@ -259,7 +259,7 @@ export default {
             "/play/api/v1/device/channellist",
             {params:{serial:this.devid}}
         ).then(res => {
-            console.log(res);
+            // console.log(res);
             this.total = res.data["ChannelCount"];
             this.channels = res.data["ChannelList"];
         }).catch(err => {

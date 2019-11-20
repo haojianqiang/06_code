@@ -146,7 +146,7 @@
             this.getDeviceList();
             //之后每20秒钟取一次设备列表
             this.timer = setInterval(() => {
-                console.log("获取设备");
+                // console.log("获取设备");
                 this.getDeviceList();
             }, 20000);
         },
@@ -191,7 +191,7 @@
                     url: "/play/api/v1/device/list",
                     data:params
                 }).then(res => {
-                    console.log(res);
+                    // console.log(res);
                     this.total = res.data["DeviceCount"];
                     this.devices = res.data["DeviceList"];
                 }).catch(err => {

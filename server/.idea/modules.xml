@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app-server/app-server.iml" filepath="$PROJECT_DIR$/app-server/app-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/miniProgram-server/miniProgram-server.iml" filepath="$PROJECT_DIR$/miniProgram-server/miniProgram-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/origin-server/origin-server.iml" filepath="$PROJECT_DIR$/origin-server/origin-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pub/pub.iml" filepath="$PROJECT_DIR$/pub/pub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/server.iml" filepath="$PROJECT_DIR$/.idea/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-eureka/spring-cloud-eureka.iml" filepath="$PROJECT_DIR$/spring-cloud-eureka/spring-cloud-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-eureka2/spring-cloud-eureka2.iml" filepath="$PROJECT_DIR$/spring-cloud-eureka2/spring-cloud-eureka2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-schedule/spring-cloud-schedule.iml" filepath="$PROJECT_DIR$/spring-cloud-schedule/spring-cloud-schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-zuul/spring-cloud-zuul.iml" filepath="$PROJECT_DIR$/spring-cloud-zuul/spring-cloud-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-server/web-server.iml" filepath="$PROJECT_DIR$/web-server/web-server.iml" />
+    </modules>
+  </component>
+</project>

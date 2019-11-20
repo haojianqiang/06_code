@@ -9,7 +9,7 @@
           <!--<el-select placeholder="请选择溯源码" v-model.trim="tableQuery.originCode">
             <el-option v-for="item in codes" :key="item.id" :label="item.sourceCode" :value="item.sourceCode"/>
           </el-select>-->
-          <select class="select-box" v-model.trim="tableQuery.originCode" @change="fillInput">
+          <select class="select-box" v-model.trim="tableQuery.originCode">
             <option v-for="item in codes" :key="item.id" :label="item.sourceCode" :value="item.sourceCode"/>
           </select>
           <input type="text" placeholder="请选择溯源码" class="input-box" ref="inputBox" :value="tableQuery.originCode" @input="changeValue()"/>
