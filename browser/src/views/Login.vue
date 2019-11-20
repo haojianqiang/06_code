@@ -78,8 +78,8 @@ export default {
         message:'请求失败',
         type:'error'
       })
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

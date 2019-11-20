@@ -226,6 +226,52 @@ export default new Router({
             requireAuth: true
           }
         },
+        // 农技服务
+        {
+          path: "index",
+          name: "首页",
+          component: () => import("@/views/Index.vue"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 资料库
+        {
+          path: "dataBank",
+          name: "资料库",
+          component: () => import("@/views/agricultureTechnology/dataBank/index"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 线上服务
+        {
+          path: "onlineservice",
+          name: "线上服务",
+          component: () => import("@/views/agricultureTechnology/onlineService/index"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 线下预约
+        {
+          path: "offlinebooking",
+          name: "线下预约",
+          component: () => import("@/views/agricultureTechnology/offlineBooking/index"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 农户反馈
+        {
+          path: "feedback",
+          name: "农户反馈",
+          component: () => import("@/views/agricultureTechnology/feedBack/index"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        
           // 测试首页
         /*  {
               path: "main2",

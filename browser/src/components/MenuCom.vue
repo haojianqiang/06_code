@@ -58,6 +58,18 @@
         <i class="el-icon-search"></i>
         <span slot="title">溯源</span>
       </el-menu-item>
+
+      <!-- 农技服务 -->
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="el-icon-s-shop"></i>
+          <span>农技服务</span>
+        </template>
+        <el-menu-item index="/dataBank">资料库</el-menu-item>
+        <el-menu-item index="/onlineService">线上服务</el-menu-item>
+        <el-menu-item index="/offlineBooking">线下预约</el-menu-item>
+        <el-menu-item index="/feedBack">农户反馈</el-menu-item>
+      </el-submenu>
      <!-- <el-menu-item index="/main2">
         <i class="el-icon-search"></i>
         <span slot="title">测试首页</span>
