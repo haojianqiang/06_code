@@ -235,6 +235,24 @@ export default new Router({
             requireAuth: true
           }
         },
+        // 文章内容
+        {
+          path: "articlecontent",
+          name: "文章内容",
+          component: () => import("@/views/agricultureTechnology/dataBank/articlecontent"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 分类
+        {
+          path: "classify",
+          name: "分类",
+          component: () => import("@/views/agricultureTechnology/dataBank/classify"),
+          meta: {
+            requireAuth: true
+          }
+        },
         // 线上服务
         {
           path: "onlineservice",

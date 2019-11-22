@@ -52,7 +52,7 @@ export default {
         data: params
       })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.ok) {
             // 缓存数据
             _this.$store.state.user = {id:res.data.data.userId,userName:res.data.data.userName};
