@@ -66,9 +66,10 @@
           <span>农技服务</span>
         </template>
         <el-menu-item index="/dataBank">资料库</el-menu-item>
+        <el-menu-item index="/dataBankManagement">资料库管理</el-menu-item>
         <el-menu-item index="/onlineService">线上服务</el-menu-item>
         <el-menu-item index="/offlineBooking">线下预约</el-menu-item>
-        <el-menu-item index="/feedBack">农户反馈</el-menu-item>
+        <el-menu-item index="/feedBack">农户反馈</el-menu-item>      
       </el-submenu>
 
      <!-- <el-menu-item index="/main2">

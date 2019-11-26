@@ -237,7 +237,7 @@ export default new Router({
         },
         // 文章内容
         {
-          path: "articlecontent",
+          path: "articlecontent/:obj",
           name: "文章内容",
           component: () => import("@/views/agricultureTechnology/dataBank/articlecontent"),
           meta: {
@@ -246,9 +246,17 @@ export default new Router({
         },
         // 分类
         {
-          path: "classify",
+          path: "classify/:obj",
           name: "分类",
           component: () => import("@/views/agricultureTechnology/dataBank/classify"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: "dataBankManagement",
+          name: "资料库管理",
+          component: () => import("@/views/agricultureTechnology/dataBank/dataBankManagement"),
           meta: {
             requireAuth: true
           }
