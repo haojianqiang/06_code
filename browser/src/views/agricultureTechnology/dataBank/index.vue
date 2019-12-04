@@ -1,4 +1,5 @@
 <template>
+    <!-- 资料库 -->
     <div class="container">       
         <!-- 容器 -->
         <div class="containerMian">
@@ -221,10 +222,6 @@ export default {
             })
         }
     },
-    components: {
-
-    },
-    
 }
 </script>
 

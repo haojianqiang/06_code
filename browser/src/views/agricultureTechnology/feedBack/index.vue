@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 农户反馈 -->
         <h1>农户反馈</h1>
     </div>
 </template>
@@ -10,6 +11,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

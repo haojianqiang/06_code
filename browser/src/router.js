@@ -256,7 +256,7 @@ export default new Router({
         {
           path: "dataBankManagement",
           name: "资料库管理",
-          component: () => import("@/views/agricultureTechnology/dataBank/dataBankManagement"),
+          component: () => import("@/views/agricultureTechnology/dataBankManagement/index"),
           meta: {
             requireAuth: true
           }
@@ -266,6 +266,24 @@ export default new Router({
           path: "onlineservice",
           name: "线上服务",
           component: () => import("@/views/agricultureTechnology/onlineService/index"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 免费咨询
+        {
+          path: "chatonline/:id",
+          name: "免费咨询",
+          component: () => import("@/views/agricultureTechnology/onlineService/chatOnline"),
+          meta: {
+            requireAuth: true
+          }
+        },
+        // 个人简介
+        {
+          path: "introduce/:id",
+          name: "个人简介",
+          component: () => import("@/views/agricultureTechnology/onlineService/introduce"),
           meta: {
             requireAuth: true
           }

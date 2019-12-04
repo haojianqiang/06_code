@@ -1,4 +1,5 @@
 <template>
+    <!-- 线下预约 -->
     <div>
         <h1>线下预约</h1>
     </div>
@@ -10,6 +11,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

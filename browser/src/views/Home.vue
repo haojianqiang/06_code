@@ -47,21 +47,21 @@
 import HeaderCom from "@/components/HeaderCom.vue";
 import FooterCom from "@/components/FooterCom.vue";
 import MenuCom from "@/components/MenuCom.vue";
-import ModuleCom from "@/components/ModuleCom.vue";
+// import ModuleCom from "@/components/ModuleCom.vue";
 export default {
   name: "Home",
   components: {
     HeaderCom,
     FooterCom,
     MenuCom,
-    ModuleCom
+    // ModuleCom
   },
   data() {
     return {};
   },
   methods: {
     // 点击Tabs,切换相应路由
-    tabClick(tab) {
+    tabClick() {
       this.$router.push({ path: this.activeIndex });
     },
     // 移除Tabs
@@ -80,7 +80,7 @@ export default {
               );
               this.$router.push({ path: this.activeIndex });
           } else {
-              this.$router.push({ path: "/" });
+              // this.$router.push({ path: "/" });
           }
       },
   },
@@ -105,7 +105,7 @@ export default {
     }
   },
   watch: {
-    $route(to, from) {
+    $route(to) {
       let flag = false;
       for (let item of this.openTab) {
         if (item.name === to.name) {
