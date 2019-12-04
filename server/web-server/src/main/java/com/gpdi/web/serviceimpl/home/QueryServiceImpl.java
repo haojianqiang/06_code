@@ -88,12 +88,19 @@ public class QueryServiceImpl implements QueryService {
         if(houseId != null){
             whereHumidityOnCo2 += " and ch.id = "+houseId;
         }
-        sql = " SELECT b.name 鸡棚,date_format(a.create_time,'%H') 时间,humidity 湿度,co2 二氧化碳" +
-              " ,temperature 温度,nh3 氨气 from pm_house_info_record a,(SELECT ch.id,ch.name,ch.farm_id from cm_house ch," +
-              " cm_farm cf where cf.id =ch.farm_id "+whereHumidityOnCo2+") b " +
-              " where a.house_id =b.id " +
-              " and date_format(a.create_time, '%Y%m%d') =date_format(DATE_SUB(CURDATE(),INTERVAL 1 DAY), '%Y%m%d')" +
-              " and date_format(a.create_time,'%H') in ('10','12','14','16','18')";
+//        sql = " SELECT b.name 鸡棚,date_format(a.create_time,'%H') 时间,humidity 湿度,co2 二氧化碳" +
+//              " ,temperature 温度,nh3 氨气 from pm_house_info_record a,(SELECT ch.id,ch.name,ch.farm_id from cm_house ch," +
+//              " cm_farm cf where cf.id =ch.farm_id "+whereHumidityOnCo2+") b " +
+//              " where a.house_id =b.id " +
+//              " and date_format(a.create_time, '%Y%m%d') =date_format(DATE_SUB(CURDATE(),INTERVAL 1 DAY), '%Y%m%d')" +
+//              " and date_format(a.create_time,'%H') in ('10','12','14','16','18')";
+        sql = "SELECT b.name 鸡棚,date_format(a.date,'%H') 时间,humidity 湿度,co2 二氧化碳\n" +
+                ",temperature 温度,nh3 氨气 from (select * from (select * from sys_sensor order by date DESC) a GROUP BY a.deviceId,date_format(a.date,'%H') ORDER BY deviceId desc) a," +
+                "(SELECT ch.id,ch.name,ch.farm_id from cm_house ch,\n" +
+                "cm_farm cf where cf.id =ch.farm_id "+whereHumidityOnCo2+") b ,sys_sensor_house_mapping c\n" +
+                "where a.deviceId=c.deviceId and c.houseId=b.id\n" +
+                "and date_format(a.date, '%Y%m%d') =date_format(DATE_SUB(CURDATE(),INTERVAL 3 DAY), '%Y%m%d')" +
+                " and date_format(a.date,'%H') in ('10','12','14','16','18')";
         query.setSql(sql);
         generalDao.execute(query);
         query.getResult().getRows();
