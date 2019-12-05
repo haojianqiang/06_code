@@ -101,7 +101,7 @@ export default {
                     title: '首席咨询专家',
                     college: '华南农业大学',
                     sphere: '杂交水稻',
-                    img: 'http://img1.imgtn.bdimg.com/it/u=1751363221,3218116690&fm=26&gp=0.jpg',
+                    img: 'http://img4.imgtn.bdimg.com/it/u=1046260098,1185832924&fm=26&gp=0.jpg',
                 },
                 {
                     id: 5,
@@ -117,7 +117,7 @@ export default {
                     title: '首席咨询专家',
                     college: '华南农业大学',
                     sphere: '杂交水稻',
-                    img: 'http://img1.imgtn.bdimg.com/it/u=1751363221,3218116690&fm=26&gp=0.jpg',
+                    img: 'http://img4.imgtn.bdimg.com/it/u=1046260098,1185832924&fm=26&gp=0.jpg',
                 },
                 {
                     id: 7,

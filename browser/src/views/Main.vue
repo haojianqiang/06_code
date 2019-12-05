@@ -131,7 +131,7 @@
           <el-row>
             <el-col :span="8">
               <div class="span-text-1">区域城市:</div>
-                <el-select v-model="city" size="small" placeholder="请选择" @change="DropdownBoxRegion()">
+                <el-select style="color: red" v-model="city" size="small" placeholder="请选择" @change="DropdownBoxRegion()">
                   <el-option
                     v-for="item in region"
                     :key="item.value"
@@ -408,7 +408,8 @@ export default {
           var liveValueList =[];
           var saleValueList= [];
           if(this.columnInfo) {
-            this.columnInfo.forEach(function (item, index) {
+            // this.columnInfo.forEach(function (item, index) {
+            this.columnInfo.forEach(function (item) {
                 numberOfBarsList.push(item.鸡棚);
                 liveValueList.push(item.存栏);
                 saleValueList.push(item.出栏);
@@ -517,7 +518,8 @@ export default {
             var numberOfBarsList =[];
             var valueList =[];
             if(this.stock){
-              this.stock.forEach(function (item, index) {
+              this.stock.forEach(function (item) {
+              // this.stock.forEach(function (item, index) {
                 if(numberOfBarsList.indexOf(item.鸡棚) ==-1){
                     numberOfBarsList.push(item.鸡棚);  
                     valueList.push(item.存栏量);
@@ -604,14 +606,16 @@ export default {
                 var seriesContent =[];
                 var dateList =['10','12','14','16','18'];
                 if(this.HumidityOnCo2){
-                  this.HumidityOnCo2.forEach(function (item, index) {
+                  this.HumidityOnCo2.forEach(function (item) {
+                  // this.HumidityOnCo2.forEach(function (item, index) {
                     if(numberOfBarsList.indexOf(item.鸡棚) ==-1){
                        numberOfBarsList.push(item.鸡棚);  
                     }
                   });
                   for(var i=0;i<dateList.length;i++){
                     valueList =[];
-                    this.HumidityOnCo2.forEach(function (item, index) {
+                    // this.HumidityOnCo2.forEach(function (item, index) {
+                    this.HumidityOnCo2.forEach(function (item) {
                       if(dateList[i]==item.时间){
                         valueList.push(item.温度);
                       }    
@@ -703,9 +707,9 @@ export default {
                       {
                           type: 'value',
                           name: '温度（℃）',
-                          min: 20,
-                          max: 40,
-                          interval: 5,
+                          min: -10,
+                          max: 30,
+                          interval: 10,
                           axisLine: {
                             lineStyle: {
                                 color: '#ffffff'
@@ -729,14 +733,16 @@ export default {
               var seriesContent =[];
               var colorList =['#4B0082','#0000FF','#778899','#00FFFF','#00FF7F'];
               if(this.HumidityOnCo2){
-                  this.HumidityOnCo2.forEach(function (item, index) {
+                  this.HumidityOnCo2.forEach(function (item) {
+                  // this.HumidityOnCo2.forEach(function (item, index) {
                     if(numberOfBarsList.indexOf(item.鸡棚) ==-1){
                        numberOfBarsList.push(item.鸡棚);
                     }
                   });
                   for(var i=0;i<numberOfBarsList.length;i++){
                   valueList =[];
-                  this.HumidityOnCo2.forEach(function (item, index) {
+                  // this.HumidityOnCo2.forEach(function (item, index) {
+                  this.HumidityOnCo2.forEach(function (item) {
                     if(numberOfBarsList[i]==item.鸡棚){
                        valueList.push(item.湿度);
                     }
@@ -819,14 +825,16 @@ export default {
                 var color1List2 =['#FFDEAD','#FF4500','#C6E2FF','#FFDEAD','#FF4500','#C6E2FF'];
                 var color1List3 =['#FFE4C4','#FF3030','#B0E2FF','#FFE4C4','#FF3030','#B0E2FF'];
                 if(this.HumidityOnCo2){
-                  this.HumidityOnCo2.forEach(function (item, index) {
+                  this.HumidityOnCo2.forEach(function (item) {
+                  // this.HumidityOnCo2.forEach(function (item, index) {
                     if(numberOfBarsList.indexOf(item.鸡棚) ==-1){
                        numberOfBarsList.push(item.鸡棚);  
                     }    
                   });
                   for(var i=0;i<numberOfBarsList.length;i++){
                   valueList =[];
-                  this.HumidityOnCo2.forEach(function (item, index) {
+                  this.HumidityOnCo2.forEach(function (item) {
+                  // this.HumidityOnCo2.forEach(function (item, index) {
                     if(numberOfBarsList[i]==item.鸡棚){
                        valueList.push(item.二氧化碳);
                     }    
@@ -929,14 +937,16 @@ export default {
                 var seriesContent =[];
                 var dateList =['10','12','14','16','18'];
                 if(this.HumidityOnCo2){
-                  this.HumidityOnCo2.forEach(function (item, index) {
+                  this.HumidityOnCo2.forEach(function (item) {
+                  // this.HumidityOnCo2.forEach(function (item, index) {
                     if(numberOfBarsList.indexOf(item.鸡棚) ==-1){
                        numberOfBarsList.push(item.鸡棚);  
                     }    
                   });
                   for(var i=0;i<dateList.length;i++){
                     valueList =[];
-                    this.HumidityOnCo2.forEach(function (item, index) {
+                    this.HumidityOnCo2.forEach(function (item) {
+                    // this.HumidityOnCo2.forEach(function (item, index) {
                       if(dateList[i]==item.时间){
                         valueList.push(item.氨气);
                       }    
@@ -1053,7 +1063,8 @@ export default {
                 var volumeList =[];
                 var amountList= [];
                 if(this.productionInfo) {
-                    this.productionInfo.forEach(function (item, index) {
+                    this.productionInfo.forEach(function (item) {
+                    // this.productionInfo.forEach(function (item, index) {
                         dateList.push(item.时间);
                         volumeList.push(item.成交量);
                         amountList.push(item.成交金额);
@@ -1316,7 +1327,7 @@ export default {
               })
             },
             drawCharts() {                               
-                let echartDivSize = document.getElementsByClassName('middleEchartsSize');
+                // let echartDivSize = document.getElementsByClassName('middleEchartsSize');
 
                 //肉鸡出存栏信息
                 let chartColumn = document.getElementById('chartColumn');
@@ -1369,7 +1380,7 @@ export default {
                 drawMortality.style.width = window.innerWidth*0.18+'px';
                 drawMortality.style.height = window.innerHeight*0.2+'px';
                 this.drawMortalityChart();
-                leftThree
+                // leftThree
                 
                 //生产信息
                 let drawProduction = document.getElementById('drawProduction');
@@ -1471,7 +1482,8 @@ export default {
                 this.fetchData();
             },	
        showTime(){
-           var today,hour,second,minute,year,month,date;
+          //  var today,hour,second,minute,year,month,date;
+           var today,year,month,date;
            var strDate ;
            today=new Date();
            var n_day = today.getDay();
@@ -1505,17 +1517,19 @@ export default {
            year = today.getFullYear();
            month = today.getMonth()+1;
            date = today.getDate();
-           hour = today.getHours();
-           minute =today.getMinutes();
-           second = today.getSeconds();
+          //  hour = today.getHours();
+          //  minute =today.getMinutes();
+          //  second = today.getSeconds();
            this.currentDate = year + "年" + month + "月" + date + "日 "+strDate; //显示时间
        },
       //  //修改table tr行的背景色
-       warningTableRowStyle({row,rowIndex}){
+      //  warningTableRowStyle({row,rowIndex}){
+       warningTableRowStyle(){
         return 'background-color: #011120;color: #fff;font-weight: 500;border: 1px solid #03559d'
        },
        //修改table header的背景色
-       warnIngTableHeaderColor({row,column,rowIndex,columnIndex}){
+      //  warnIngTableHeaderColor({row,column,rowIndex,columnIndex}){
+       warnIngTableHeaderColor({rowIndex}){
          if(rowIndex === 0){
            return 'background-color: #002b71;color: #fff;font-weight: 500;font-size:24px;border: 1px solid #03559d'
          }
@@ -1523,16 +1537,19 @@ export default {
            return 'background-color: #002b71;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d'
          }
        },
-       colColor({row,column,rowIndex,columnIndex}){
+      //  colColor({row,column,rowIndex,columnIndex}){
+       colColor(){
         return 'background-color: #002b71;color: #fff;font-weight: 500;font-size:16px;border: 1px solid #03559d'
        },
 
         //  //修改table tr行的背景色
-       tableRowStyle({row,rowIndex}){
+      //  tableRowStyle({row,rowIndex}){
+       tableRowStyle(){
         return 'background-color: #002b71;color: #fff;font-weight: 300;'
        },
        //修改table header的背景色
-       tableHeaderColor({row,column,rowIndex,columnIndex}){
+      //  tableHeaderColor({row,column,rowIndex,columnIndex}){
+       tableHeaderColor({rowIndex,columnIndex}){
          let returnStyle = '';
          if(rowIndex === 0){
            if(columnIndex ==0 || columnIndex == 2){
@@ -1544,7 +1561,8 @@ export default {
          }
           return 'background-color: #132F58;color: #02ccce;font-weight: 300;font-size:14px;'+returnStyle;
        },
-       cellStyle({row,column,rowIndex,columnIndex}){
+      //  cellStyle({row,column,rowIndex,columnIndex}){
+       cellStyle({columnIndex}){
          let returnStyle = '';
          if(columnIndex !=1){
               returnStyle  += 'border-right: none';
@@ -1557,7 +1575,7 @@ export default {
         mounted: function () {
             /*this.drawCharts();*/
             
-            const that = this;
+            // const that = this;
             window.onresize = ()=>{
               // window.location.reload();
               // window.screenHeight = document.body.clientHeight;
@@ -1614,6 +1632,7 @@ export default {
   .myStyle  .el-input__inner{
       background-color: rgb(1, 17, 32, 0)!important;
       border: 1px solid rgb(7, 127, 232)!important;
+      color: aliceblue;
   }
   .el-picker-panel .el-date-picker .el-popper {
           height: 32px;
@@ -1701,6 +1720,7 @@ export default {
           }
       
           .myBorder{
+            color: #fddeae;
             padding-top: 0.56vh;
             margin-bottom: 0.76vh;
             border: 1px solid #03559d;
