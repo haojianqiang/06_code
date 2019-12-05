@@ -114,38 +114,38 @@ public class PmHouseInfoRecordServiceImpl implements PmHouseInfoRecordService {
      *  已迁移到schedule服务
      */
     //每7分钟时向数据库插入一条实时的传感器数据
-    @Scheduled(cron = "0 0/7 * * * ? ")
-    public void timingSave(){
-        String SensorData= HttpRequest.interfaceUtil("http://www.nolan.net.cn:10023/agr/post/", "[{\"USR\":\"LHD\",\"PW\":\"123456\",\"ID\":\"F528009C0936D7\"}]");
-
-        JSONArray sensor= JSONArray.fromObject(SensorData);
-        Object date=sensor.getString(0);
-        JSONObject BigDate = JSONObject.fromObject(date);
-
-        String ETMP=BigDate.getString("ETMP");
-        String EHUM=BigDate.getString("EHUM");
-        String CO2=BigDate.getString("CO2");
-        String NH3=BigDate.getString("NH3");
-        //强转为float
-        Float ETMP1= Float.valueOf(ETMP);
-        Float EHUM1= Float.valueOf(EHUM);
-        Float CO21= Float.valueOf(CO2);
-        Float NH31= Float.valueOf(NH3);
-        PmHouseInfoRecord newRecord = null;
-        //获取全部鸡舍
-        List<Integer> houseIds = generalDao.queryList(Integer.class, "select id from cm_house");
-        for(Integer id :houseIds){
-            newRecord = new PmHouseInfoRecord();
-            newRecord.setHouseId(id);
-            newRecord.setCreateTime(new Date());//创建时间
-            newRecord.setAvgWight(Float.valueOf("0.2"));//均重
-            newRecord.setCo2(CO21);//二氧化碳浓度
-            newRecord.setNh3(NH31);//氨气浓度
-            newRecord.setTemperature(ETMP1);//温度
-            newRecord.setHumidity(EHUM1);//湿度
-            save(newRecord);
-        }
-
-    }
+//    @Scheduled(cron = "0 0/7 * * * ? ")
+//    public void timingSave(){
+//        String SensorData= HttpRequest.interfaceUtil("http://www.nolan.net.cn:10023/agr/post/", "[{\"USR\":\"LHD\",\"PW\":\"123456\",\"ID\":\"F528009C0936D7\"}]");
+//
+//        JSONArray sensor= JSONArray.fromObject(SensorData);
+//        Object date=sensor.getString(0);
+//        JSONObject BigDate = JSONObject.fromObject(date);
+//
+//        String ETMP=BigDate.getString("ETMP");
+//        String EHUM=BigDate.getString("EHUM");
+//        String CO2=BigDate.getString("CO2");
+//        String NH3=BigDate.getString("NH3");
+//        //强转为float
+//        Float ETMP1= Float.valueOf(ETMP);
+//        Float EHUM1= Float.valueOf(EHUM);
+//        Float CO21= Float.valueOf(CO2);
+//        Float NH31= Float.valueOf(NH3);
+//        PmHouseInfoRecord newRecord = null;
+//        //获取全部鸡舍
+//        List<Integer> houseIds = generalDao.queryList(Integer.class, "select id from cm_house");
+//        for(Integer id :houseIds){
+//            newRecord = new PmHouseInfoRecord();
+//            newRecord.setHouseId(id);
+//            newRecord.setCreateTime(new Date());//创建时间
+//            newRecord.setAvgWight(Float.valueOf("0.2"));//均重
+//            newRecord.setCo2(CO21);//二氧化碳浓度
+//            newRecord.setNh3(NH31);//氨气浓度
+//            newRecord.setTemperature(ETMP1);//温度
+//            newRecord.setHumidity(EHUM1);//湿度
+//            save(newRecord);
+//        }
+//
+//    }
 
 }
