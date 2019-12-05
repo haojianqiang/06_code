@@ -99,7 +99,7 @@ public class QueryServiceImpl implements QueryService {
                 "(SELECT ch.id,ch.name,ch.farm_id from cm_house ch,\n" +
                 "cm_farm cf where cf.id =ch.farm_id "+whereHumidityOnCo2+") b ,sys_sensor_house_mapping c\n" +
                 "where a.deviceId=c.deviceId and c.houseId=b.id\n" +
-                "and date_format(a.date, '%Y%m%d') =date_format(DATE_SUB(CURDATE(),INTERVAL 3 DAY), '%Y%m%d')" +
+                "and date_format(a.date, '%Y%m%d') =str_to_date('20191204', '%Y%m%d')" +
                 " and date_format(a.date,'%H') in ('10','12','14','16','18')";
         query.setSql(sql);
         generalDao.execute(query);
