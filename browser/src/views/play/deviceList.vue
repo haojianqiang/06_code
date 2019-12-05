@@ -188,7 +188,7 @@
                 params.append("_", timenow.timestamp);
                 this.$http({
                     method: "get",
-                    url: "/play/api/v1/device/list",
+                    url: "/v1/device/list",
                     data:params
                 }).then(res => {
                     // console.log(res);

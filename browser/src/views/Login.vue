@@ -43,12 +43,12 @@ export default {
       params.append("account", this.loginForm.account);
       params.append("password", this.loginForm.password);
 
-      this.$router.replace({path: "/main"});
+      // this.$router.replace({path: "/main"});
 
       // 发送请求
       this.$http({
         method: "post",
-        url: "/login/login.json?action=login",
+        url: "/login.json?action=login",
         data: params
       })
         .then(res => {

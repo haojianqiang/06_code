@@ -79,8 +79,6 @@ export default {
                   this.openTab[this.openTab.length - 1].route
               );
               this.$router.push({ path: this.activeIndex });
-          } else {
-              // this.$router.push({ path: "/" });
           }
       },
   },
@@ -105,7 +103,7 @@ export default {
     }
   },
   watch: {
-    $route(to) {
+    $route(to, from) {
       let flag = false;
       for (let item of this.openTab) {
         if (item.name === to.name) {
