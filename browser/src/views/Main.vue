@@ -198,7 +198,7 @@
                   <div class="whole-title">
                     <span class="title-text">温度</span>
                   </div>
-                  <div id="drawTemperature" class="divTemperature"></div>
+                  <div id="drawTemperature"></div>
                 </div>
               </el-col>
 
@@ -686,7 +686,7 @@ export default {
           calculable: true,
           // 温度
           grid: {
-            top: "15%",
+            bottom: "33%",
             left: "15%"
           },
           xAxis: [
@@ -707,7 +707,7 @@ export default {
             {
               type: "value",
               scale: true,
-              min: -10,
+              min: 0,
               max: 30,
               interval: 10,
               axisLine: {
@@ -1852,12 +1852,6 @@ body > .el-container {
 .myPadding .el-table td,
 .el-table th.is-leaf {
   border-bottom: 1px solid #03559d !important;
-}
-.divTemperature {
-  width: 100%;
-  padding: 0 10%;
-  /* color: aliceblue; */
-  /* font-size: 28px; */
 }
 </style>
 
