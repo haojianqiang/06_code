@@ -781,8 +781,8 @@ export default {
           },
           // 湿度
           grid: {
-            top: "80%",
-            bottom: "80%"
+            left: "15%",
+            bottom: "15%"
           },
           tooltip: {},
           xAxis: {
@@ -917,8 +917,8 @@ export default {
             }
           },
           grid: {
-            top: "80%",
-            bottom: "80%"
+            left: "15%",
+            bottom: "20%"
           },
           // 二氧化碳
           xAxis: {
@@ -933,7 +933,6 @@ export default {
           },
           yAxis: {
             type: "value",
-
             min: 0,
             max: 1800,
             interval: 600,
