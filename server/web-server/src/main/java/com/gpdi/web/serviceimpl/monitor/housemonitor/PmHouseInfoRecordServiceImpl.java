@@ -42,9 +42,9 @@ public class PmHouseInfoRecordServiceImpl implements PmHouseInfoRecordService {
     public QueryResult query(QueryData queryData, QuerySettings settings) {
         Query query = new PagedQuery<>(settings);
         String where = "";
-
+//        where+="p.house_id=m.houseId and m.deviceId=s.deviceId";
         if (queryData.getHouseId() != null) {
-            where += " and p.house_id = :houseId";
+            where += " and m.houseId = :houseId";
             System.out.println(queryData.getHouseId());
             query.put("houseId", queryData.getHouseId());
         }
@@ -52,6 +52,9 @@ public class PmHouseInfoRecordServiceImpl implements PmHouseInfoRecordService {
         query.select("p.id,p.house_id as 'houseId',p.avg_wight as 'avgWight',p.co2,p.nh3,p.temperature," +
                 "p.humidity,p.weather,p.create_time as 'createTime',p.modify_time as 'modifyTime',p.modifier,p.modifier_id as 'modifierId'").from("pm_house_info_record p")
                 .orderBy("p.create_time DESC LIMIT 1").where(where);
+//        query.select("p.id,m.houseId,p.avg_wight as 'avgWight',s.co2,s.nh3,s.temperature," +
+//                "s.humidity,p.weather,s.date as 'createTime',p.modify_time as 'modifyTime',p.modifier,p.modifier_id as 'modifierId'").from("pm_house_info_record p,sys_sensor s,sys_sensor_house_mapping m")
+//                .orderBy("s.date DESC LIMIT 1").where(where);
         generalDao.execute(query);
         return query.getResult();
     }
