@@ -137,12 +137,30 @@
         },
         created() {
             this.getFarmName();
+            this.getSensor('30');
         },
         mounted(){
             this.protocol = this.getQueryString("protocol", "");
             },
         watch: {},
         methods: {
+            getSensor(houseId){
+                let params = new URLSearchParams();
+                params.append("houseId", houseId);
+                this.$http({
+                    method: "post",
+                    url: "/web-server/monitor/housemonitor/query.json?action=query",
+                    data: params
+                }).then(res => {
+                    this.pmHouseInfo = res.data.rows[0];
+                    this.pmHouseInfo.temperature += "℃";
+                    this.pmHouseInfo.humidity += "%";
+                    this.pmHouseInfo.nh3 += "ppm";
+                    this.pmHouseInfo.co2 += "ppm";
+                }).catch(err => {
+                    console.log(err);
+                });
+            },
             updateInfo(houseId) {
                 for (var i in this.pmHouseInfo){
                     if (this.pmHouseInfo[i]){
