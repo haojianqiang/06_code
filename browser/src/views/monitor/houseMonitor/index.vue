@@ -228,7 +228,7 @@
                 this.channelListDlgVisible = !this.channelListDlgVisible;
                 this.loading = true;
                 this.$http.get(
-                    "/play/api/v1/channel/list",
+                    "/v1/channel/list",
                     {params:{
                             q: this.q,
                             start: (this.currentPage -1) * this.pageSize,
@@ -263,7 +263,7 @@
                 this.channelListDlgVisible = !this.channelListDlgVisible;
                 this.player.bLoading = true;
                 this.$http.get(
-                    "/play/api/v1/stream/start",
+                    "/v1/stream/start",
                     {params:{
                             serial: row.DeviceID,
                             code: row.ID

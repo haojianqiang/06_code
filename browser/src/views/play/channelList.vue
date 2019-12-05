@@ -256,7 +256,7 @@ export default {
         //     console.log(err);
         // });
         this.$http.get(
-            "/play/api/v1/device/channellist",
+            "/v1/device/channellist",
             {params:{serial:this.devid}}
         ).then(res => {
             // console.log(res);

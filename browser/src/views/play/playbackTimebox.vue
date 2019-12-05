@@ -1,41 +1,21 @@
 <template>
     <div class="">
         <div class="box box-primary">
-          <div class="box-header" style="height: 10px">
-<!--            <h4 class="text-primary text-center">设备录像时间轴({{devid}}-{{channel}})</h4>-->
-          </div>
-          <div class="box-body">
-            <form class="form-inline">
-              <div class="form-group form-group-sm">
-                <button type="button" class="btn btn-sm btn-primary" @click.prevent="$router.go(-1)">
-                  <i class="fa fa-chevron-left"></i> 返回
-                </button>
-              </div>
-<!--              <div class="form-group pull-right" >-->
-<!--                  <div class="input-group input-group-sm" >-->
-<!--                      <DatePicker class="form-control" @update:day="updateDay" :day="day" ref="datePicker"></DatePicker>-->
-<!--                      <div class="input-group-btn">-->
-<!--                          <button type="button" class="btn btn-sm btn-default" @click.prevent="showDatePicker">-->
-<!--                            <i class="fa fa-calendar"></i>-->
-<!--                          </button>-->
-<!--                          <router-link :to="`/devices/playback/list/${this.devid}/${this.channel}/${this.day}`" replace class="btn btn-default btn-sm">-->
-<!--                              <i class="fa fa-hand-o-right"></i> 列表视图-->
-<!--                          </router-link>-->
-<!--                      </div>-->
-<!--                  </div>-->
-<!--              </div>-->
-            </form>
+            <div style="float:right">
+                <el-date-picker
+                        v-model="playBackDate"
+                        type="date"
+                        @change="dateChange"
+                        placeholder="选择日期">
+                </el-date-picker>
+            </div>
             <br>
-            <div class="clearfix"></div>
             <LivePlayer live muted :hasaudio="hasAudio" :videoUrl="videoUrl" :currentTime="currentTime" @ended="onVideoEnd" @timeupdate="onVideoTimeUpdate"
               v-loading="videoLoading" element-loading-text="加载中" element-loading-background="#000"
               style="margin:0 auto; max-width:700px;">
             </LivePlayer>
             <br>
-            <br>
-            <TimeRule :videos="videos" @timeChange="onTimeChange" ref="timeRule" v-loading="loading"></TimeRule>
-            <div class="clearfix"></div>
-            <br>
+            <TimeRule :videos="videos" @timeChange="onTimeChange" ref="timeRule" v-loading="loading" :key="timeRuleIsChange"></TimeRule>
           </div>
         </div>
     </div>
@@ -83,7 +63,9 @@ export default {
       videoUrl: "",
       hasAudio: false,
       streamID: "",
-      touchTimer: 0
+      touchTimer: 0,
+      playBackDate:"",
+      timeRuleIsChange:1//用来重新渲染字组件
     };
   },
   // computed: {
@@ -91,10 +73,12 @@ export default {
   // },
   watch: {
     day: function(newVal, oldVal) {
-      this.timerange = [
+        this.timerange = [
         moment(this.day, "YYYYMMDD").startOf('hour').toDate(),
         moment(this.day, "YYYYMMDD").startOf('hour').toDate()
-      ]
+      ];
+        this.getRecords(true);
+        this.timeRuleIsChange ++;
     },
     video: function(newVal, oldVal) {
       if(newVal && newVal != oldVal) {
@@ -115,9 +99,10 @@ export default {
     showDatePicker() {
       $(this.$refs.datePicker.$el).focus();
     },
-    // updateDay(day) {
-    //   this.$router.replace(`/devices/playback/${this.mode}/${this.devid}/${this.channel}/${day}`);
-    // },
+
+    dateChange(day) {
+        this.day = moment(day).format("YYYYMMDD");
+    },
     nextTimeRange() {
       var end = moment(this.day, "YYYYMMDD").add(24, 'hours');
       var now = moment().startOf("second");
@@ -149,7 +134,7 @@ export default {
         return
       }
       this.$http.get(
-        "/play/api/v1/playback/recordlist",
+        "/v1/playback/recordlist",
         {params:{
                 timeout : 3,
                 serial:this.devid,
@@ -159,7 +144,6 @@ export default {
         }}
     ).then(res => {
         this.records = this.records.concat(res.data["RecordList"]);
-        // console.log("记录："+this.records);
     }).catch(err => {
         console.log(err);
     }).finally(()=>{
@@ -183,7 +167,7 @@ export default {
             return
           }
            this.$http.get(
-              "/play/api/v1/playback/stop",
+              "/v1/playback/stop",
               {params:{streamid: this.streamID}}
           ).catch(err => {
               console.log(err);
@@ -199,7 +183,7 @@ export default {
       if(!this.video) return;
       this.videoLoading = true;
       this.$http.get(
-            "/play/api/v1/playback/start",
+            "/v1/playback/start",
             {params:{
                     serial: this.devid,
                     code: this.channel,

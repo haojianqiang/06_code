@@ -27,7 +27,7 @@ module.exports = {
         target: "http://127.0.0.1:8082",
         changeOrigin: true, // 是否跨域
         pathRewrite: {
-          "^/api/login": "" // 规定请求地址以什么作为开头
+          "^/api/login": "/login" // 规定请求地址以什么作为开头
         }
       },
       //养鸡服务接口
@@ -39,16 +39,14 @@ module.exports = {
         }
       },
       //视频播放接口
-      "/api/play": {
-        target: "http://172.16.107.71:10000",
+      "/api/v1": {
+        target: "http://172.16.107.72:10000",
         changeOrigin: true, // 是否跨域
-        pathRewrite: {
-          "^/api/play": "/" // 规定请求地址以什么作为开头
-        }
-      }
+       }
     }, // 设置代理
     before: app => {}
   },
+
   configureWebpack: {
     resolve: {
       alias: {
