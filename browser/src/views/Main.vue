@@ -176,9 +176,9 @@
               <div class="myPadding">
                 <el-table
                   :data="warningInfo"
-                  :row-style="tableRowStyle1"
+                  :row-style="tableRowStyle"
                   :header-cell-style="warnIngTableHeaderColor"
-                  :cell-style="tableCellStyle1"
+                  :cell-style="cellStyle"
                   height="130"
                   style="width: 100%;"
                 >
@@ -374,19 +374,6 @@ export default {
       screenHeight: document.body.clientHeight,
       //当前时间
       currentDate: "",
-      tableRowStyle1: {
-        opacity: 0,
-        color: "#fff",
-        "font-weight": 500,
-        border: "1px solid #03559d"
-      },
-      tableCellStyle1: {
-        opacity: 0,
-        color: "#fff",
-        "font-weight": 500,
-        "font-size": "16px",
-        border: "1px solid #03559d"
-      }
     };
   },
   created() {

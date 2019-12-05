@@ -24,7 +24,7 @@ module.exports = {
       // }
       //登录接口独享
       "/api/login": {
-        target: "http://127.0.0.1:8082",
+        target: "http://125.91.105.205:8082",
         changeOrigin: true, // 是否跨域
         pathRewrite: {
           "^/api/login": "/login" // 规定请求地址以什么作为开头
@@ -32,7 +32,7 @@ module.exports = {
       },
       //养鸡服务接口
       "/api/web-server": {
-        target: "http://127.0.0.1:8082",
+        target: "http://125.91.105.205:8082",
         changeOrigin: true, // 是否跨域
         pathRewrite: {
           "^/api/web-server": "/web-server" // 规定请求地址以什么作为开头
