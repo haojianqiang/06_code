@@ -24,7 +24,7 @@ export default {
     },
     props: {
         minutesPerUnit: {
-            default: 5,
+            default: 1,
             type: Number
         },
         videos: {
@@ -181,7 +181,7 @@ export default {
                     }
                 }
                 var _start = moment(start).startOf("hour");
-                for(var i=0;;i+=5) {
+                for(var i=0;;i++) {
                     var c = moment(_start).add(i, "minute");
                     if(c.isBefore(start, "minute")) {
                         continue;
@@ -203,7 +203,6 @@ export default {
 </script>
 
 <style >
-/*@import url(~assets/styles/variables.less);*/
 
 .time-rule {
     overflow: hidden;
@@ -241,7 +240,7 @@ export default {
 
 .time-text {
     float: left;
-    width: 60px;
+    width: 58px;
     border-left: 1px solid #999;
     border-top: 1px solid #999;
     -ms-user-select: none;

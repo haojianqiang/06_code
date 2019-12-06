@@ -198,10 +198,10 @@ export default {
   // },
   mounted() {
     // this.$refs["q"].focus();
-    // this.getChannels();
+    this.getChannels();
     this.timer = setInterval(() => {
         this.getChannels();
-    }, 3000);
+    }, 10000);//每10秒钟获取一下通道
     $(document).on("mouseup", this.talkStop);
   },
   beforeDestroy() {

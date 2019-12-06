@@ -90,7 +90,7 @@
                 <el-table-column prop="UpdatedAt" label="更新时间" min-width="160" sortable="custom"></el-table-column>
                 <el-table-column label="操作" min-width="220" fixed="right" v-if="!isMobile()">
                     <template slot-scope="props">
-                        <div class="btn-group btn-group-xs">
+                        <div class="btn-group btn-group-xs" >
                             <router-link class="btn btn-info" :to="`/playBack/channels/${props.row.ID}/1`" v-if="props.row.Online && props.row.ChannelCount > 0">
                                 <i class="fa fa-info"></i> 查看通道
                             </router-link>

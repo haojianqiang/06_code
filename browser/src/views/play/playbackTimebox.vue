@@ -1,33 +1,30 @@
 <template>
     <div class="">
-        <div class="box box-primary">
-            <div style="float:right">
-                <el-date-picker
-                        v-model="playBackDate"
-                        type="date"
-                        @change="dateChange"
-                        placeholder="选择日期">
-                </el-date-picker>
-            </div>
-            <br>
+        <div style="text-align: center;margin-top: 8px">
+            选择日期：
+            <el-date-picker
+                    v-model="playBackDate"
+                    type="date"
+                    @change="dateChange"
+                    placeholder="选择日期">
+            </el-date-picker>
+        </div>
+        <div style="margin-top: 8px">
             <LivePlayer live muted :hasaudio="hasAudio" :videoUrl="videoUrl" :currentTime="currentTime" @ended="onVideoEnd" @timeupdate="onVideoTimeUpdate"
               v-loading="videoLoading" element-loading-text="加载中" element-loading-background="#000"
               style="margin:0 auto; max-width:700px;">
             </LivePlayer>
-            <br>
+        </div>
+        <div style="margin:10px 8px 0px 8px;" >
             <TimeRule :videos="videos" @timeChange="onTimeChange" ref="timeRule" v-loading="loading" :key="timeRuleIsChange"></TimeRule>
-          </div>
         </div>
     </div>
 </template>
 
 <script>
-// import _ from "lodash";
 import moment from "moment";
-// import DatePicker from "./datePicker.vue";
 import TimeRule from './timeRule.vue'
 import LivePlayer from '@liveqing/liveplayer'
-// import { mapState } from "vuex";
 
 export default {
   props: {
@@ -77,6 +74,7 @@ export default {
         moment(this.day, "YYYYMMDD").startOf('hour').toDate(),
         moment(this.day, "YYYYMMDD").startOf('hour').toDate()
       ];
+        // this.stopPlayback();
         this.getRecords(true);
         this.timeRuleIsChange ++;
     },
@@ -101,7 +99,9 @@ export default {
     },
 
     dateChange(day) {
-        this.day = moment(day).format("YYYYMMDD");
+        if (day){
+            this.day = moment(day).format("YYYYMMDD");
+        }
     },
     nextTimeRange() {
       var end = moment(this.day, "YYYYMMDD").add(24, 'hours');
@@ -218,6 +218,7 @@ export default {
   },
   mounted() {
     let mmt = moment();
+    this.playBackDate = mmt;
     let n = mmt.diff(mmt.clone().startOf('day'), 'minutes');
     n -= 10;
     if(n < 0) n = 0;
