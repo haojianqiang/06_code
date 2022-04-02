@@ -13,7 +13,7 @@ import java.util.Date;
  * 与接口中指定的服务名称一致
  */
 @WebService(serviceName = "revSMS",
-        targetNamespace = "http://sms.gpdi.com",
+        targetNamespace = "http://sms.xxxx.com",
         endpointInterface = "com.gpdi.schedule.webservice.RevSMSService"
 )
 @Component
